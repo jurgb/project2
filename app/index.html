@@ -1,0 +1,68 @@
+<html lang="en" ng-app="StarterApp">
+  <head>
+    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="Assets/style.css">
+
+  </head>
+  <body layout="column" ng-controller="AppCtrl">
+    <md-toolbar layout="row">
+      <button ng-click="toggleSidenav('left')" hide-gt-sm class="menuBtn">
+        <span class="visually-hidden">Menu</span>
+      </button>
+      <ul class="nav">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Signup</a></li>
+          <li><a href="#">Login</a></li>
+      </ul>
+    </md-toolbar>
+    <div flex layout="row"  ng-controller="AngCategorieController" ng-init="index()">
+        <md-sidenav flex="30" layout="column" class=" md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-sm')">
+            <md-toolbar>
+                <h1 class="md-toolbar-tools categorietitel">Categories</h1>
+              </md-toolbar>
+            <md-list>
+              <md-item ng-repeat="cat in categories">
+               <md-button ng-click="selectcat(1)">
+                <md-item-content>
+                  <div class="md-tile-left">
+                    <img src="Assets/images/icons/MyIcons/svg/{{ cat.icoon }}" class="face" >
+                  </div>
+                  <div class="md-tile-content">
+                    <h3>{{ cat.name }}</h3>
+                    <h4>{{ cat.subtitle }}</h4>
+                    <p>
+                        {{ cat.notes }}
+                    </p>
+                  </div>
+                </md-item-content>
+                  </md-button>
+                <md-divider md-inset ng-if="!$last"></md-divider>
+              </md-item>
+            </md-list>
+        </md-sidenav>
+        <div layout="column" id="content">
+            <md-content>
+                <md-card ng-repeat="contentcat in contentvoorbeelden">
+                  <img src="Assets/images/destinations/{{contentcat.picture}}" alt="Washed Out">
+                  <md-card-content>
+                    <h2>Dit is een item van categorie {{contentcat.Categorie}}</h2>
+                    <p>
+                        {{contentcat.info}}
+                    </p>
+                  </md-card-content>
+                </md-card>
+            </md-content>
+        </div>
+    </div>
+    <!-- Angular Material Dependencies -->
+      <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-animate/angular-animate.js"></script>
+    <script src="./bower_components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+    <script src="./bower_components/angular-route/angular-route.js"></script>
+    <script src="src/app.js"></script>
+    <script src="src/controllers/AngCategorieController.js"></script>
+    <script src="src/controllers/AngContentController.js"></script>
+    <script src="src/factories/CategorieAPI.js"></script>
+  </body>
+</html>
